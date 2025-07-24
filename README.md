@@ -29,8 +29,9 @@ The infrastructure you want, defined in your Terraform configuration.
 The infrastructure you have, tracked by Terraform after apply.
 
 - Terraform uses the state file to compare what you want vs. what you have:
-a. If they match ➔ No changes on terraform apply.
-b. If they differ ➔ Terraform applies only what’s needed to match your config.
+
+- If they match ➔ No changes on terraform apply.
+- If they differ ➔ Terraform applies only what’s needed to match your config.
 
 ---
 
