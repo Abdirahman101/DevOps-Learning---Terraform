@@ -32,6 +32,15 @@ Terraform uses the state file to compare what you want vs. what you have:
 - If they match ➔ No changes on terraform apply.
 - If they differ ➔ Terraform applies only what’s needed to match your config.
 
+**Configuring a Resource Block (AWS instance example)**
+
+Resource "<resource type>" "<name of instance>" {
+  ami = "<amazon machine image template (for OS)>" #example is ubuntu
+  instance_type = "t2.micro" #determines hardware config of instance (simple free tier)
+Tags = { #optional section - good way to label and categorise your resources (good practise)
+Name = "Helloworld"
+}
+}
 ---
 
 ## ⚙️ Terraform Commands Explained
@@ -46,6 +55,9 @@ Terraform uses the state file to compare what you want vs. what you have:
 
 - `terraform plan`  
   Shows what actions Terraform will take to achieve the desired state.
+  __'+' create: resources that will be created
+  '~' update in-place: resources that will be modified
+  '-' destroy: resources that will be destroyed__
 
 - `terraform apply`  
   Applies the changes required to reach the desired state.
