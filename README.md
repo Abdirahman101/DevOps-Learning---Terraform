@@ -86,6 +86,7 @@ _Add more commands as you learn advanced workflows:_
 ## 🛠️ Creating an EC2 instance task
 
 First visit [terraform registry](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) and install the AWS provider. Once installed, run the terraform init command in your terminal (make sure you cd into the desired directory on your local machine)
+
 <img width="326" height="252" alt="Screenshot 2025-07-24 at 20 04 49" src="https://github.com/user-attachments/assets/0da198d3-cba1-447e-a108-5da2a88856ee" />
 
 <img width="608" height="285" alt="Screenshot 2025-07-24 at 20 05 13" src="https://github.com/user-attachments/assets/2bdb92c5-42ee-42a4-b89c-cd420689efac" />
