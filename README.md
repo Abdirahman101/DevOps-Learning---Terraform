@@ -36,10 +36,10 @@ Terraform uses the state file to compare what you want vs. what you have:
 
 ## ⚙️ Terraform Commands Explained
 
-> Document what each Terraform command does, with your own comments for revision.
+> Document what each Terraform command does
 
 - `terraform init`  
-  Initializes a Terraform working directory, downloading required provider plugins and preparing the backend.
+  Initialises a Terraform working directory, downloading required provider plugins and preparing the backend.
 
 - `terraform validate`  
   Validates your configuration files for syntax correctness.
