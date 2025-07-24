@@ -34,13 +34,15 @@ Terraform uses the state file to compare what you want vs. what you have:
 
 **Configuring a Resource Block (AWS instance example)**
 
-Resource "<resource type>" "<name of instance>" {
-  ami = "<amazon machine image template (for OS)>" #example is ubuntu
-  instance_type = "t2.micro" #determines hardware config of instance (simple free tier)
-Tags = { #optional section - good way to label and categorise your resources (good practise)
-Name = "Helloworld"
+resource "<resource type>" "<name of instance>" {
+  ami           = "<amazon machine image template>"   # e.g., "ami-0abcd1234ef567890" for Ubuntu
+  instance_type = "t2.micro"                          # hardware configuration (t2.micro is free tier eligible)
+
+  tags = {                                            # optional but good practice for organization
+    Name = "Helloworld"
+  }
 }
-}
+
 ---
 
 ## ⚙️ Terraform Commands Explained
