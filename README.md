@@ -91,13 +91,39 @@ First visit [terraform registry](https://registry.terraform.io/providers/hashico
 
 <img width="608" height="285" alt="Screenshot 2025-07-24 at 20 05 13" src="https://github.com/user-attachments/assets/2bdb92c5-42ee-42a4-b89c-cd420689efac" />
 
+Locate the documentation for a EC2 resource:aws_instance in the terraform registry. Take a look at the "Argument Reference" to understand which arguments are required for spinning up an EC2 instance. For this task we require an AMI since we are not using a launch template (screenshot of the terraform skeleton below)
 
+<img width="1025" height="422" alt="Screenshot 2025-07-27 at 10 59 32" src="https://github.com/user-attachments/assets/0c0a0812-ae57-41cd-9623-4f81f4238284" />
 
+<img width="696" height="199" alt="AWS EC2 Terraform skeleton" src="https://github.com/user-attachments/assets/2f9701bb-cae8-4081-aa2d-9aa2703cc7a1" />
 
+Open the AWS management console and navigate to the EC2 page. Click Launch an instance - this is where we will get the actual AMI ID and the free tier eligible instance_type. In this case, I have opted for the Amazon Linux AMI and the t2.micro 
 
+<img width="469" height="136" alt="Screenshot 2025-07-27 at 11 10 51" src="https://github.com/user-attachments/assets/09d07d01-f335-4de1-b5d2-b3b3f61aa0f9" />
 
+Create an access key in your AWS console under IAM and configure this in your terminal.
 
+Next, run 'terraform plan'.
 
+<img width="1004" height="958" alt="Screenshot 2025-07-27 at 11 22 01" src="https://github.com/user-attachments/assets/8bfe5835-b52e-4cc2-bae1-d581479e37ec" />
+
+<img width="1057" height="117" alt="Screenshot 2025-07-27 at 11 22 22" src="https://github.com/user-attachments/assets/33ddd510-b344-404f-977f-f7821435e829" />
+
+Terraform will now compare our current state (the current outlook of instances running in our AWS console) to the desired state (creating an EC2 instance).
+
+<img width="351" height="50" alt="Screenshot 2025-07-27 at 11 24 18" src="https://github.com/user-attachments/assets/f6bf5c97-f5bd-458c-8e81-c74fcc1db154" />
+
+Above is the current state.
+
+Now, run 'terraform apply'.
+
+<img width="999" height="952" alt="Screenshot 2025-07-27 at 11 26 03" src="https://github.com/user-attachments/assets/ffcafcc4-4ed2-48b4-bea9-b3703df96ebb" />
+
+<img width="531" height="241" alt="Screenshot 2025-07-27 at 11 26 45" src="https://github.com/user-attachments/assets/92879dea-f999-4fa5-b88e-bebd4ac255d8" />
+
+We have now created our EC2 instance using Terraform! Below is the new current state shown in the AWS Console - there is now an EC2 instance running!
+
+<img width="349" height="48" alt="New current state after terraform apply" src="https://github.com/user-attachments/assets/273f4e44-73c6-4f8d-bd57-25887a05ab43" />
 
 ---
 
