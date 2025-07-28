@@ -44,6 +44,18 @@ Name = "Helloworld"
 }
 ```
 
+**Terraform importing!**
+
+- Terraform import is a powerful command that allows you to take existing resources in your cloud environment and bring them under your Terraform management.
+
+Import block: Used to import instances using 'id'. You can find how to import aws_instance resources using the [terraform registry](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#import) under AWS.
+
+<img width="400" height="109" alt="Screenshot 2025-07-28 at 13 50 29" src="https://github.com/user-attachments/assets/0c8f05c2-edf6-4de7-9868-2a07b3a0f6dd" />
+
+<img width="682" height="114" alt="Screenshot 2025-07-28 at 13 53 43" src="https://github.com/user-attachments/assets/c0d9bc45-bd53-47ef-8345-122292dd5232" />
+
+Remember to run `terraform plan` once imported. Ensures the resources you have imported matches your current infrastructure!
+
 ---
 
 ## ⚙️ Terraform Commands Explained
@@ -74,11 +86,13 @@ Name = "Helloworld"
 - `terraform show`  
   Displays the current state in a human-readable format.
 
+- `terraform import`
+  Brings existing infrastructure under Terraform management by mapping it into your state file.
+
 _Add more commands as you learn advanced workflows:_
 
 - [ ] `terraform taint`
 - [ ] `terraform state`
-- [ ] `terraform import`
 - [ ] `terraform workspace`
 
 ---
@@ -103,7 +117,7 @@ Open the AWS management console and navigate to the EC2 page. Click Launch an in
 
 Create an access key in your AWS console under IAM and configure this in your terminal.
 
-Next, run 'terraform plan'.
+Next, run `terraform plan`.
 
 <img width="1004" height="958" alt="Screenshot 2025-07-27 at 11 22 01" src="https://github.com/user-attachments/assets/8bfe5835-b52e-4cc2-bae1-d581479e37ec" />
 
@@ -115,7 +129,7 @@ Terraform will now compare our current state (the current outlook of instances r
 
 Above is the current state.
 
-Now, run 'terraform apply'.
+Now, run `terraform apply`.
 
 <img width="999" height="952" alt="Screenshot 2025-07-27 at 11 26 03" src="https://github.com/user-attachments/assets/ffcafcc4-4ed2-48b4-bea9-b3703df96ebb" />
 
@@ -124,6 +138,33 @@ Now, run 'terraform apply'.
 We have now created our EC2 instance using Terraform! Below is the new current state shown in the AWS Console - there is now an EC2 instance running!
 
 <img width="349" height="48" alt="New current state after terraform apply" src="https://github.com/user-attachments/assets/273f4e44-73c6-4f8d-bd57-25887a05ab43" />
+
+---
+
+## 🛠️ Terraform Import Challenge: Manual Deployment of EC2 + Terraform Import Usage
+
+Create an EC2 instance in your AWS console (manually).
+
+<img width="640" height="179" alt="Screenshot 2025-07-28 at 14 11 56" src="https://github.com/user-attachments/assets/4c8d5569-5563-4000-b64d-e582ea8a2586" />
+
+Return to VS Code and add another resource block and name it 'import'
+
+<img width="483" height="196" alt="Screenshot 2025-07-28 at 14 16 24" src="https://github.com/user-attachments/assets/7dbea5d2-fd89-451a-bf1d-ac9e75ca9f51" />
+
+Run the import terraform import command in the Terraform registry for an AWS instance (resource). Add the respective name of your resource bnlock which in this case is 'import' and add the EC2 instance id (we just created manually).
+
+<img width="670" height="31" alt="Screenshot 2025-07-28 at 14 17 35" src="https://github.com/user-attachments/assets/b4f7a6d6-8567-481e-a4b6-336fd0a6e79a" />
+
+<img width="555" height="147" alt="Screenshot 2025-07-28 at 14 21 49" src="https://github.com/user-attachments/assets/6f961c41-00c6-419e-a7a0-957bafa1c986" />
+
+Next run `terraform plan` to check that the current state matches the desired state. We are given this output for updates in place: 
+
+<img width="504" height="236" alt="Screenshot 2025-07-28 at 14 27 09" src="https://github.com/user-attachments/assets/3d5fa3b4-087e-4378-b0a7-b2056a8412ee" />
+
+We need to locate 'tags' in the terraform registry under 'Argument reference'. We can see that tags are configured under the resource block.
+
+<img width="487" height="251" alt="Screenshot 2025-07-28 at 14 34 15" src="https://github.com/user-attachments/assets/9b84029e-672f-4346-9067-cbe0cccc37b5" />
+
 
 ---
 
