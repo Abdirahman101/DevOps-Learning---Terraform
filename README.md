@@ -44,6 +44,18 @@ Name = "Helloworld"
 }
 ```
 
+**Terraform importing!**
+
+- Terraform import is a powerful command that allows you to take existing resources in your cloud environment and bring them under your Terraform management.
+
+Import block: Used to import instances using 'id'. You can find how to import aws_instance resources using the [terraform registry](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#import) under AWS.
+
+<img width="400" height="109" alt="Screenshot 2025-07-28 at 13 50 29" src="https://github.com/user-attachments/assets/0c8f05c2-edf6-4de7-9868-2a07b3a0f6dd" />
+
+<img width="682" height="114" alt="Screenshot 2025-07-28 at 13 53 43" src="https://github.com/user-attachments/assets/c0d9bc45-bd53-47ef-8345-122292dd5232" />
+
+Remember to run `terraform plan` once imported. Ensures the resources you have imported matches your current infrastructure!
+
 ---
 
 ## ⚙️ Terraform Commands Explained
@@ -74,11 +86,13 @@ Name = "Helloworld"
 - `terraform show`  
   Displays the current state in a human-readable format.
 
+- `terraform import`
+  Brings existing infrastructure under Terraform management by mapping it into your state file.
+
 _Add more commands as you learn advanced workflows:_
 
 - [ ] `terraform taint`
 - [ ] `terraform state`
-- [ ] `terraform import`
 - [ ] `terraform workspace`
 
 ---
@@ -103,7 +117,7 @@ Open the AWS management console and navigate to the EC2 page. Click Launch an in
 
 Create an access key in your AWS console under IAM and configure this in your terminal.
 
-Next, run 'terraform plan'.
+Next, run `terraform plan`.
 
 <img width="1004" height="958" alt="Screenshot 2025-07-27 at 11 22 01" src="https://github.com/user-attachments/assets/8bfe5835-b52e-4cc2-bae1-d581479e37ec" />
 
@@ -115,7 +129,7 @@ Terraform will now compare our current state (the current outlook of instances r
 
 Above is the current state.
 
-Now, run 'terraform apply'.
+Now, run `terraform apply`.
 
 <img width="999" height="952" alt="Screenshot 2025-07-27 at 11 26 03" src="https://github.com/user-attachments/assets/ffcafcc4-4ed2-48b4-bea9-b3703df96ebb" />
 
@@ -124,6 +138,37 @@ Now, run 'terraform apply'.
 We have now created our EC2 instance using Terraform! Below is the new current state shown in the AWS Console - there is now an EC2 instance running!
 
 <img width="349" height="48" alt="New current state after terraform apply" src="https://github.com/user-attachments/assets/273f4e44-73c6-4f8d-bd57-25887a05ab43" />
+
+---
+
+## 🛠️ Terraform Import Challenge: Manual Deployment of EC2 + Terraform Import Usage
+
+Create an EC2 instance in your AWS console (manually).
+
+<img width="640" height="179" alt="Screenshot 2025-07-28 at 14 11 56" src="https://github.com/user-attachments/assets/4c8d5569-5563-4000-b64d-e582ea8a2586" />
+
+Return to VS Code and add another resource block and name it 'import'
+
+<img width="483" height="196" alt="Screenshot 2025-07-28 at 14 16 24" src="https://github.com/user-attachments/assets/7dbea5d2-fd89-451a-bf1d-ac9e75ca9f51" />
+
+Run the import terraform import command in the Terraform registry for an AWS instance (resource). Add the respective name of your resource bnlock which in this case is 'import' and add the EC2 instance id (we just created manually).
+
+<img width="550" height="145" alt="image" src="https://github.com/user-attachments/assets/26293c08-dd2d-4f3f-b677-ba91adc158d4" />
+
+Next run `terraform plan` to check that the current state matches the desired state. We are given this output for updates in place: 
+
+<img width="993" height="356" alt="Screenshot 2025-07-28 at 14 47 30" src="https://github.com/user-attachments/assets/2d94d2d5-73a4-41be-88a8-473b00e44819" />
+
+We need to locate 'tags' in the terraform registry under 'Argument reference'. We can see that tags are configured under the resource block. Add the tag and the suggested `user_data_replace_on_change = false`
+
+<img width="487" height="272" alt="image" src="https://github.com/user-attachments/assets/ac7bd75b-8d7f-4969-b8e8-27eb5e98459c" />
+
+Run `terraform plan` again to preview the current vs desired states:
+
+<img width="937" height="100" alt="Screenshot 2025-07-28 at 14 50 18" src="https://github.com/user-attachments/assets/1deb2c69-44ba-4d23-ab8c-af0942cb4ca6" />
+
+As you can see, no changes are needed as our infrastructure matches the configuration (our desired state matches our current state). Making our terraform import successful - i.e. we have successfully imported our EC2 instance from AWS (**manually created**) into our managed terraform environment. 
+
 
 ---
 
