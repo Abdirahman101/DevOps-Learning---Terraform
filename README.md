@@ -153,17 +153,21 @@ Return to VS Code and add another resource block and name it 'import'
 
 Run the import terraform import command in the Terraform registry for an AWS instance (resource). Add the respective name of your resource bnlock which in this case is 'import' and add the EC2 instance id (we just created manually).
 
-<img width="670" height="31" alt="Screenshot 2025-07-28 at 14 17 35" src="https://github.com/user-attachments/assets/b4f7a6d6-8567-481e-a4b6-336fd0a6e79a" />
-
-<img width="555" height="147" alt="Screenshot 2025-07-28 at 14 21 49" src="https://github.com/user-attachments/assets/6f961c41-00c6-419e-a7a0-957bafa1c986" />
+<img width="550" height="145" alt="image" src="https://github.com/user-attachments/assets/26293c08-dd2d-4f3f-b677-ba91adc158d4" />
 
 Next run `terraform plan` to check that the current state matches the desired state. We are given this output for updates in place: 
 
-<img width="504" height="236" alt="Screenshot 2025-07-28 at 14 27 09" src="https://github.com/user-attachments/assets/3d5fa3b4-087e-4378-b0a7-b2056a8412ee" />
+<img width="993" height="356" alt="Screenshot 2025-07-28 at 14 47 30" src="https://github.com/user-attachments/assets/2d94d2d5-73a4-41be-88a8-473b00e44819" />
 
-We need to locate 'tags' in the terraform registry under 'Argument reference'. We can see that tags are configured under the resource block.
+We need to locate 'tags' in the terraform registry under 'Argument reference'. We can see that tags are configured under the resource block. Add the tag and the suggested `user_data_replace_on_change = false`
 
-<img width="487" height="251" alt="Screenshot 2025-07-28 at 14 34 15" src="https://github.com/user-attachments/assets/9b84029e-672f-4346-9067-cbe0cccc37b5" />
+<img width="487" height="272" alt="image" src="https://github.com/user-attachments/assets/ac7bd75b-8d7f-4969-b8e8-27eb5e98459c" />
+
+Run `terraform plan` again to preview the current vs desired states:
+
+<img width="937" height="100" alt="Screenshot 2025-07-28 at 14 50 18" src="https://github.com/user-attachments/assets/1deb2c69-44ba-4d23-ab8c-af0942cb4ca6" />
+
+As you can see, no changes are needed as our infrastructure matches the configuration (our desired state matches our current state). Making our terraform import successful - i.e. we have successfully imported our EC2 instance from AWS (**manually created**) into our managed terraform environment. 
 
 
 ---
