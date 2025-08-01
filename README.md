@@ -96,6 +96,56 @@ _Add more commands as you learn advanced workflows:_
 - [ ] `terraform workspace`
 
 ---
+## Terraform Workflow
+
+1. Init:
+   - Used to initialise a working directory containing terraform confif files
+   - This is the first command that should be run after writing a new terrform configuration
+   - Downloads providers
+   - Configures the backend, which manages your state files
+  
+2. Validate:
+   - Checks to see if your code is well formed, spotting early syntax errors before moving onto bigger and more complex tasks such as `plan`
+  
+3. Plan:
+   - Creates an execution plan
+   - Compares your current state to your desired state specified in config files
+  
+4. Apply:
+   - Where you apply the changes required to reach the desired state of the config (the execution)
+   - By default, apply scans the current directory for the configation and applies the changes appropriately
+   - This will ask confirmation before applying
+
+5. Destroy:
+   - Used to destroy the terraform  managed infrastructure
+   - This will ask for confirmation before destroying
+  
+---
+## Variables
+
+- Define values once and reference them multiple times
+- Makes the code reusable and "dry" (to not repeat yourself)
+- Best practise is writing it in a separate "vairables.tf" file
+
+**Input Variables**
+
+[Input variables](https://developer.hashicorp.com/terraform/language/values/variables) are the most common type of variables in Terraform. They allow you to parameterize your Terraform configurations, which makes them more dynamic and reusable.
+
+<img width="551" height="178" alt="Screenshot 2025-08-01 at 16 17 01" src="https://github.com/user-attachments/assets/dfcbb629-5831-4034-8cf7-8e284e2e1063" />
+
+<img width="862" height="520" alt="Screenshot 2025-08-01 at 16 18 15" src="https://github.com/user-attachments/assets/dfa3328b-dcee-4407-a405-a4178cbbd407" />
+
+Using var.instance_type allows us to reference the variables in our variables.tf file. Defining a default means we do not need to provide an answer when we run `terraform plan`.
+
+Best practise is to create another file called terraform.tfvars. This is where you assign the variable's value, rather than defining it using default, this is shown below.
+
+<img width="547" height="117" alt="Screenshot 2025-08-01 at 16 23 35" src="https://github.com/user-attachments/assets/cfd4e309-d167-43c6-929a-61290b55c730" />
+
+<img width="538" height="61" alt="Screenshot 2025-08-01 at 16 23 59" src="https://github.com/user-attachments/assets/34926803-6777-4451-978d-5e7b9cf16e02" />
+
+When using a .tfvars file, you want to run a `terraform apply` to see if the values are being added correctly and appropriately.
+
+<img width="1199" height="278" alt="Screenshot 2025-08-01 at 16 25 34" src="https://github.com/user-attachments/assets/2560b650-e608-45f0-b7d3-ad864fd82a5f" />
 
 ## 🛠️ Creating an EC2 instance task
 
