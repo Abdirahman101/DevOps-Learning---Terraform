@@ -147,6 +147,66 @@ When using a .tfvars file, you want to run a `terraform apply` to see if the val
 
 <img width="1199" height="278" alt="Screenshot 2025-08-01 at 16 25 34" src="https://github.com/user-attachments/assets/2560b650-e608-45f0-b7d3-ad864fd82a5f" />
 
+**Local Variable**
+
+- Allows you to centralise values that are used repeatedly. Making your code easier to manage and understand.
+- Makes your code "dry" and reduces redundancy.
+- They are internal to terraform where as, input variables are provided by the users.
+- e.g. using a local variable for the "ami_id" variable from AWS. Then referring to this local variable in the resource block. 
+
+**Output Variable**
+
+- Displays variables when `terraform plan` is ran.
+- Useful to pass over information to other configurations and automation tools.
+- e.g. used for IP addresses and IDs
+- Best practices:
+    - Meaningful names used to make it clear what the output variable is (e.g. use "instance_id" and **not** "i_id)
+    - Document outputs, always include a description in your output block. Helps others in your team understand what the output block is doing
+    - Used for critical information in automation or chaining terraform configurations together
+    - Be careful when outputting sensitive information like passwords - use terraform's sensitive attribute to prevent these values being displayed in your terminal
+
+**Input vs Local vs Output**
+
+<img width="1841" height="917" alt="Screenshot 2025-08-04 at 14 23 26" src="https://github.com/user-attachments/assets/0630ee7f-2fc7-4e71-bb74-5d2791c7b610" />
+
+---
+
+## Variable Hierarchy
+
+<img width="413" height="288" alt="Screenshot 2025-08-04 at 14 31 58" src="https://github.com/user-attachments/assets/52694648-2944-4a58-8f7a-9ded3696dcc5" />
+
+---
+
+## Types of Variables
+
+**Primitive Types vs Complex Types**
+
+<img width="1880" height="1046" alt="Screenshot 2025-08-04 at 14 45 03" src="https://github.com/user-attachments/assets/cae2ad06-89f6-4f37-9ef7-bbeeac497668" />
+
+---
+
+## Modules
+
+A Terraform Module is essentially a collection of configuration files that are grouped together in order to serve a specific process. Think of a Module as a blueprint for building a simple piece of infrastructure.
+
+**Why do we use modules?**
+
+1. Reusability
+2. Organisation
+3. Consistency
+4. Collaboration
+
+**What makes a good module**
+
+1. Simplicity - avoid hardcoding values that may change between environments (e.g. AMI's, instance types, etc.)
+2. Documentation - use a readme.md file to explain how to use the module
+3. Reusability
+4. Output Values
+
+Modularity: Keeping modules focussed on a single responisibility.
+
+---
+
 ## 🛠️ Creating an EC2 instance task
 
 First visit [terraform registry](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) and install the AWS provider. Once installed, run the terraform init command in your terminal (make sure you cd into the desired directory on your local machine)
@@ -219,6 +279,29 @@ Run `terraform plan` again to preview the current vs desired states:
 
 As you can see, no changes are needed as our infrastructure matches the configuration (our desired state matches our current state). Making our terraform import successful - i.e. we have successfully imported our EC2 instance from AWS (**manually created**) into our managed terraform environment. 
 
+---
+
+## Terraform Module Demo Example
+
+Create a new folder/directory named modules. Then add another folder/directory under modules called "ec2". Move the ec2.tf and variables.tf files to ./modules/ec2.
+
+<img width="324" height="99" alt="Screenshot 2025-08-04 at 15 36 08" src="https://github.com/user-attachments/assets/dd0af24a-24c8-4b31-8317-51e715a7e055" />
+
+Create a "main.tf" file in the directory that has the provider.tf file. The module can then be directed to in the main.tf file by includiong the path to the ec2 files.
+
+<img width="266" height="86" alt="Screenshot 2025-08-04 at 15 38 35" src="https://github.com/user-attachments/assets/fc87c809-156d-499b-88ee-f3c654b54524" />
+
+Run `terraform init` to initialise the backend and then run `terraform plan` to compare your current and desired states. Since, i've deleted my ec2 instances from previous hands-on labs, the expected output should be to add 2, change 0 and destroy 0. 
+
+<img width="309" height="20" alt="Screenshot 2025-08-04 at 15 40 41" src="https://github.com/user-attachments/assets/1356107d-4a97-49f7-987e-60c71778e205" />
+
+Run `terraform apply` to apply the terraform code.
+
+<img width="615" height="122" alt="Screenshot 2025-08-04 at 15 42 31" src="https://github.com/user-attachments/assets/061db85e-f67b-4f16-879c-72a520856fcc" />
+
+My AWS console now shows 2 new instances as expected!
+
+<img width="744" height="61" alt="Screenshot 2025-08-04 at 15 43 25" src="https://github.com/user-attachments/assets/f5581f66-ced1-4dc7-b2fa-6ec91e5a11c3" />
 
 ---
 
